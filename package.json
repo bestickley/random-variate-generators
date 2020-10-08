@@ -1,16 +1,46 @@
 {
   "name": "random-variate-generators",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Random Variate Generators",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rimraf dist && tsc",
+    "lint": "eslint '*/**/*.ts' --fix",
+    "test": "jest"
   },
-  "keywords": ["random", "variate", "generator", "distribution", "normal", "exponential", "weibull"],
+  "files": [
+    "dist/**/*"
+  ],
+  "keywords": [
+    "random",
+    "variate",
+    "generator",
+    "distribution",
+    "normal",
+    "exponential",
+    "weibull"
+  ],
   "author": "Ben Stickley & Sreeja Bhashyam",
   "license": "ISC",
   "repository": {
     "type": "git",
     "url": "https://github.com/bestickley/random-variate-generators"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.14",
+    "@typescript-eslint/eslint-plugin": "^4.4.0",
+    "@typescript-eslint/parser": "^4.4.0",
+    "eslint": "^7.10.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.5.2",
+    "prettier": "^2.1.2",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.4.1",
+    "typescript": "^4.0.3"
+  },
+  "volta": {
+    "node": "14.13.1"
   }
 }

@@ -1,0 +1,16 @@
+{
+  "name": "random-variate-generators",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["random", "variate", "generator", "distribution", "normal", "exponential", "weibull"],
+  "author": "Ben Stickley & Sreeja Bhashyam",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bestickley/random-variate-generators"
+  }
+}

@@ -28,6 +28,8 @@
     "url": "https://github.com/bestickley/random-variate-generators"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
     "@types/jest": "^26.0.14",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
     "@typescript-eslint/parser": "^4.4.0",
@@ -37,6 +39,7 @@
     "jest": "^26.5.2",
     "prettier": "^2.1.2",
     "rimraf": "^3.0.2",
+    "semantic-release": "^17.2.1",
     "ts-jest": "^26.4.1",
     "typescript": "^4.0.3"
   },

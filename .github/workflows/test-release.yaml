@@ -1,4 +1,4 @@
-name: Test and Release
+name: test-release
 
 # Run the workflow when a Pull Request is opened or when changes are pushed to master
 on:

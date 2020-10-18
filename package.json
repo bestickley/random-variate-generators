@@ -7,7 +7,8 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "lint": "eslint '*/**/*.ts' --fix",
-    "test": "jest"
+    "test": "jest",
+    "commit": "cz"
   },
   "files": [
     "dist/**/*"
@@ -33,6 +34,8 @@
     "@types/jest": "^26.0.14",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
     "@typescript-eslint/parser": "^4.4.0",
+    "commitizen": "^4.2.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.10.0",
     "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-prettier": "^3.1.4",
@@ -45,5 +48,10 @@
   },
   "volta": {
     "node": "14.13.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }

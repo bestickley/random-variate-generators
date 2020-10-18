@@ -22,7 +22,7 @@
     "exponential",
     "weibull"
   ],
-  "author": "Ben Stickley & Sreeja Bhashyam",
+  "author": "Ben Stickley <bestickley@gmail.com> & Sreeja Bhashyam",
   "license": "ISC",
   "repository": {
     "type": "git",

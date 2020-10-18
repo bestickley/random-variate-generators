@@ -1,4 +1,4 @@
-name: test-release
+name: ci
 
 # Run the workflow when a Pull Request is opened or when changes are pushed to master
 on:
@@ -27,6 +27,10 @@ jobs:
   # Install package dependencies
   - name: Install
     run: npm ci
+
+  # Run linter
+  - name: Lint
+    run: npm run lint
 
   # Run tests
   - name: Test

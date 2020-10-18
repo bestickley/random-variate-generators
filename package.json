@@ -1,12 +1,12 @@
 {
   "name": "random-variate-generators",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Random Variate Generators",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "rimraf dist && tsc",
-    "lint": "eslint '*/**/*.ts' --fix",
+    "lint": "eslint \"{src,test}/**/*.ts\" --fix",
     "test": "jest",
     "commit": "cz"
   },

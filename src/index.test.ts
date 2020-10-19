@@ -57,7 +57,7 @@ describe("geometric", () => {
     rvg = new RandVarGen();
   });
   test("p = .4", () => {
-    expect(rvg.geometric(0.4)).toBe(3.0155562885097966);
+    expect(rvg.geometric(0.4)).toBe(4);
   });
   test("p = 1.1", () => {
     expect(() => rvg.bernoulli(1.1)).toThrow();

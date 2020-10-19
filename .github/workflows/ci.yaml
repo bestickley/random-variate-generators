@@ -36,6 +36,10 @@ jobs:
   - name: Test
     run: npm test
 
+  # Run build
+  - name: Build
+    run: npm build
+
  release:
   # Only release on push to main
   if: github.event_name == 'push' && github.ref == 'refs/heads/main'

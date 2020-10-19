@@ -103,6 +103,19 @@ describe("poisson", () => {
   });
 });
 
+describe("triangular", () => {
+  let rvg: RandVarGen;
+  beforeEach(() => {
+    rvg = new RandVarGen();
+  });
+  test("a = 1, b = 2", () => {
+    expect(rvg.triangular(0, 1, 2)).toBe(0.6546607471817637);
+  });
+  test("a = 1, b = 2", () => {
+    expect(() => rvg.triangular(2, 1, 0)).toThrow();
+  });
+});
+
 describe("uniform", () => {
   let rvg: RandVarGen;
   beforeEach(() => {

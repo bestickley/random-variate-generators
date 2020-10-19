@@ -129,6 +129,22 @@ export class RandVarGen {
     }
     return x;
   }
+  /**
+   * Random Triangular Generator
+   * @param a minimum
+   * @param c mode
+   * @param b maximum
+   */
+  triangular(a: number, c: number, b: number): number {
+    if (b <= a) throw new Error("a > b");
+    const u = this.genRandNum();
+    const cutOff = (c - a) / (b - a);
+    if (u < cutOff) {
+      return a + Math.sqrt((b - a) * (c - a) * u);
+    } else {
+      return b - Math.sqrt((b - a) * (b - c) * (1 - u));
+    }
+  }
   uniform(a: number, b: number): number {
     return a + (b - a) * this.genRandNum();
   }

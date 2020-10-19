@@ -36,6 +36,12 @@ jobs:
   - name: Test
     run: npm test
 
+  # Upload code coverage to CodeCov
+  - name: CodeCov
+    uses: codecov/codecov-action@v1
+    with:
+      token: ${{ secrets.CODECOV_TOKEN }}
+
   # Run build
   - name: Build
     run: npm build

@@ -20,7 +20,12 @@
     "distribution",
     "normal",
     "exponential",
-    "weibull"
+    "weibull",
+    "gamma",
+    "poisson",
+    "binomial",
+    "bernoulli",
+    "uniform"
   ],
   "author": "Ben Stickley <bestickley@gmail.com> & Sreeja Bhashyam",
   "license": "ISC",

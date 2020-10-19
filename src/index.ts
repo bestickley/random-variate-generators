@@ -96,7 +96,7 @@ export class RandVarGen {
   }
   geometric(p: number): number {
     if (p < 0 || p > 1) throw new Error("0 <= p <= 1");
-    return Math.log(this.genUniform()) / Math.log(1 - p);
+    return Math.ceil(Math.log(this.genUniform()) / Math.log(1 - p));
   }
   normal(mu: number, sigma: number): number {
     const rand = this.genUniform();

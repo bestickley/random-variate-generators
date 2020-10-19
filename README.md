@@ -8,8 +8,32 @@
 ```ts
 import { RandVarGen } from "random-variate-generators";
 const rvg = RandVarGen();
-rvg.exponential(5)
+rvg.bernoulli(.4);
+rvg.binomial(.4, 3);
+rvg.exponential(1);
+rvg.geometric(.4);
+rvg.gamma(.8, 4);
+rvg.normal(1, 2);
+rvg.poisson(1);
+rvg.uniform(1, 2);
+rvg.weibull(1, 2);
+```
+
+## Customize Random Uniform Generator
+Each random variate generator depends on an internal random Uniform(0,1) generator. By default, a [linear congruential generator](https://en.wikipedia.org/wiki/Linear_congruential_generator) is used with the parameters: a=1664525 (multiplier), x0=123456789 (seed), c=1013904223 (increment), m=2^32 (modulus). You can customize the random uniform generator as shown below:
+```ts
+import { RandVarGen } from "random-variate-generators";
+// customize lcg seed
+const rvgCustomLcgSeed = new RandVarGen(987654321);
+// customize lcg params
+const rvgCustomLcgParams = new RandVarGen(22695477, 987654321, 1, 2**32);
+// customize generator
+function* customGenerator() {
+  yield Math.random();
+}
+const customGen = customGenerator();
+const rvgCustomGenerator = new RandVarGen(customGen);
 ```
 
 ## Learn The Math
-Checkout Dr. Goldsman's Lecture [Slides](https://www2.isye.gatech.edu/~sman/courses/6644/Module07-RandomVariateGenerationSlides_171116.pdf) on the Inverse Transform Theorem
+Credit goes to Dr. Goldsman's [Random Variate Generation Slides](https://www2.isye.gatech.edu/~sman/courses/6644/Module07-RandomVariateGenerationSlides_171116.pdf) for the math behind `random-variate-generators`

@@ -46,7 +46,7 @@ export class RandVarGen {
     if (p < 0 || p > 1) throw new Error("0 <= p <= 1");
     return this.genRandNum() <= 1 - p ? 0 : 1;
   }
-  binomial(n: number, p: number): number {
+  binomial(p: number, n: number): number {
     if (p < 0 || p > 1) throw new Error("0 <= p <= 1");
     if (n <= 0) throw new Error("n > 0");
     let sum = 0;

@@ -25,16 +25,16 @@ describe("binomial", () => {
     rvg = new RandVarGen();
   });
   test("n = 2, p = .4", () => {
-    expect(rvg.binomial(2, 0.4)).toBe(1);
+    expect(rvg.binomial(0.4, 2)).toBe(1);
   });
   test("n = 3, p = .9", () => {
-    expect(rvg.binomial(3, 0.9)).toBe(3);
+    expect(rvg.binomial(0.9, 3)).toBe(3);
   });
   test("n = 4, p = 1.1", () => {
-    expect(() => rvg.binomial(4, 1.1)).toThrow();
+    expect(() => rvg.binomial(1.1, 4)).toThrow();
   });
   test("n = -5, p = 0.1", () => {
-    expect(() => rvg.binomial(-5, 0.1)).toThrow();
+    expect(() => rvg.binomial(0.1, -5)).toThrow();
   });
 });
 

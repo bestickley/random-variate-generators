@@ -31,7 +31,7 @@ export class RandVarGen {
     2 ** 32
   );
 
-  genRandNum(): number {
+  genUniform(): number {
     const iterResult = this.randNumGen.next();
     if (!iterResult.done) {
       return iterResult.value;
@@ -44,7 +44,7 @@ export class RandVarGen {
 
   bernoulli(p: number): number {
     if (p < 0 || p > 1) throw new Error("0 <= p <= 1");
-    return this.genRandNum() <= 1 - p ? 0 : 1;
+    return this.genUniform() <= 1 - p ? 0 : 1;
   }
   binomial(p: number, n: number): number {
     if (p < 0 || p > 1) throw new Error("0 <= p <= 1");
@@ -57,20 +57,20 @@ export class RandVarGen {
   }
   exponential(lambda: number): number {
     if (lambda <= 0) throw new Error("lambda > 0");
-    return (-1 / lambda) * Math.log(this.genRandNum());
+    return (-1 / lambda) * Math.log(this.genUniform());
   }
   gamma(beta: number, lambda: number): number {
     if (beta < 1) {
       const b = (Math.E + beta) / Math.E;
       while (true) {
-        const w = b * this.genRandNum();
+        const w = b * this.genUniform();
         if (w < 1) {
           const y = w ** (1 / beta);
-          const v = this.genRandNum();
+          const v = this.genUniform();
           if (v <= Math.E ** -y) return y / lambda;
         } else {
           const y = -1 * Math.log((b - w) / beta);
-          const v = this.genRandNum();
+          const v = this.genUniform();
           if (v <= y ** (beta - 1)) return y / lambda;
         }
       }
@@ -80,8 +80,8 @@ export class RandVarGen {
       const c = beta + a ** -1;
       const d = 1 + Math.log(4.5);
       while (true) {
-        const u1 = this.genRandNum();
-        const u2 = this.genRandNum();
+        const u1 = this.genUniform();
+        const u2 = this.genUniform();
         const v = a * Math.log(u1 / (1 - u1));
         const y = beta * Math.E ** v;
         const z = u1 ** 2 * u2;
@@ -96,10 +96,10 @@ export class RandVarGen {
   }
   geometric(p: number): number {
     if (p < 0 || p > 1) throw new Error("0 <= p <= 1");
-    return Math.log(this.genRandNum()) / Math.log(1 - p);
+    return Math.log(this.genUniform()) / Math.log(1 - p);
   }
   normal(mu: number, sigma: number): number {
-    const rand = this.genRandNum();
+    const rand = this.genUniform();
     let sign = 0;
     if (1 - rand > 0) {
       sign = 1;
@@ -124,7 +124,7 @@ export class RandVarGen {
     let p = 1;
     let x = -1;
     while (p >= a) {
-      p *= this.genRandNum();
+      p *= this.genUniform();
       x += 1;
     }
     return x;
@@ -137,7 +137,7 @@ export class RandVarGen {
    */
   triangular(a: number, c: number, b: number): number {
     if (b <= a) throw new Error("a > b");
-    const u = this.genRandNum();
+    const u = this.genUniform();
     const cutOff = (c - a) / (b - a);
     if (u < cutOff) {
       return a + Math.sqrt((b - a) * (c - a) * u);
@@ -146,10 +146,10 @@ export class RandVarGen {
     }
   }
   uniform(a: number, b: number): number {
-    return a + (b - a) * this.genRandNum();
+    return a + (b - a) * this.genUniform();
   }
   weibull(lambda: number, beta: number): number {
     if (lambda <= 0) throw new Error("lambda > 0");
-    return (1 / lambda) * (-1 * Math.log(this.genRandNum())) ** (1 / beta);
+    return (1 / lambda) * (-1 * Math.log(this.genUniform())) ** (1 / beta);
   }
 }

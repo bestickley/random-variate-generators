@@ -1,6 +1,6 @@
 {
   "name": "random-variate-generators",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Random Variate Generators",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -60,7 +60,9 @@
     }
   },
   "release": {
-    "branches": ["main"],
+    "branches": [
+      "main"
+    ],
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
@@ -70,7 +72,7 @@
       "@semantic-release/changelog"
     ],
     "preset": "angular"
-  }, 
+  },
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",

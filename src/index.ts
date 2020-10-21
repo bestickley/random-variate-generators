@@ -70,10 +70,9 @@ export class RandVarGen {
    */
   erlang(lambda: number, n: number): number {
     if (lambda <= 0) throw new Error("lambda > 0");
-    const product = Array.from(Array(n).keys()).reduce(
-      (prev, cur) => cur * this.genUniform(),
-      1
-    );
+    const product = Array.from(Array(n).keys())
+      .map((n) => n + 1)
+      .reduce((prev) => prev * this.genUniform(), 1);
     return (-1 / lambda) * Math.log(product);
   }
   /**

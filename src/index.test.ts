@@ -57,7 +57,7 @@ describe("erlang", () => {
     rvg = new RandVarGen();
   });
   test("lambda = 1", () => {
-    expect(rvg.erlang(1, 2)).toBe(0.13258851314562184);
+    expect(rvg.erlang(1, 2)).toBe(1.6730119352250947);
   });
   test("lambda = 0, n = 5", () => {
     expect(() => rvg.erlang(0, 3)).toThrow();

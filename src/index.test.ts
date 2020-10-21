@@ -51,6 +51,19 @@ describe("exponential", () => {
   });
 });
 
+describe("erlang", () => {
+  let rvg: RandVarGen;
+  beforeEach(() => {
+    rvg = new RandVarGen();
+  });
+  test("lambda = 1", () => {
+    expect(rvg.erlang(1, 2)).toBe(0.13258851314562184);
+  });
+  test("lambda = 0, n = 5", () => {
+    expect(() => rvg.erlang(0, 3)).toThrow();
+  });
+});
+
 describe("geometric", () => {
   let rvg: RandVarGen;
   beforeEach(() => {

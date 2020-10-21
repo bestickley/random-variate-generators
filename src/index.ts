@@ -41,11 +41,19 @@ export class RandVarGen {
       );
     }
   }
-
+  /**
+   * Random Bernoulli Generator by Inverse Transform Method
+   * @param p
+   */
   bernoulli(p: number): number {
     if (p < 0 || p > 1) throw new Error("0 <= p <= 1");
     return this.genUniform() <= 1 - p ? 0 : 1;
   }
+  /**
+   * Random Binomial Generator by Convolution Method
+   * @param p
+   * @param n
+   */
   binomial(p: number, n: number): number {
     if (p < 0 || p > 1) throw new Error("0 <= p <= 1");
     if (n <= 0) throw new Error("n > 0");
@@ -55,10 +63,31 @@ export class RandVarGen {
     });
     return sum;
   }
+  /**
+   * Random Erlang Generator by Convolution Method
+   * @param lambda
+   * @param n
+   */
+  erlang(lambda: number, n: number): number {
+    if (lambda <= 0) throw new Error("lambda > 0");
+    const product = Array.from(Array(n).keys()).reduce(
+      (prev, cur) => cur * this.genUniform(),
+      1
+    );
+    return (-1 / lambda) * Math.log(product);
+  }
+  /**
+   * Random Exponential Generator by Inverse Transform Method
+   * @param lambda
+   */
   exponential(lambda: number): number {
     if (lambda <= 0) throw new Error("lambda > 0");
     return (-1 / lambda) * Math.log(this.genUniform());
   }
+  /**
+   * Random Gamma Generator by X
+   * @param lambda
+   */
   gamma(beta: number, lambda: number): number {
     if (beta < 1) {
       const b = (Math.E + beta) / Math.E;
@@ -94,10 +123,19 @@ export class RandVarGen {
       }
     }
   }
+  /**
+   * Random Geometric Generator by Inverse Transform Method
+   * @param p
+   */
   geometric(p: number): number {
     if (p < 0 || p > 1) throw new Error("0 <= p <= 1");
     return Math.ceil(Math.log(this.genUniform()) / Math.log(1 - p));
   }
+  /**
+   * Random Normal Generator by X
+   * @param mu mean
+   * @param sigma standard deviation
+   */
   normal(mu: number, sigma: number): number {
     const rand = this.genUniform();
     let sign = 0;
@@ -119,6 +157,10 @@ export class RandVarGen {
         (c0 + c1 * t + c2 * t ** 2) / (1 + d1 * t + d2 * t ** 2 + d3 * t ** 3));
     return mu + sigma * z;
   }
+  /**
+   * Random Poisson Generator by X
+   * @param lambda
+   */
   poisson(lambda: number): number {
     const a = Math.E ** (-1 * lambda);
     let p = 1;
@@ -130,7 +172,7 @@ export class RandVarGen {
     return x;
   }
   /**
-   * Random Triangular Generator
+   * Random Triangular Generator by Inverse Transform Method
    * @param a minimum
    * @param c mode
    * @param b maximum
@@ -145,9 +187,19 @@ export class RandVarGen {
       return b - Math.sqrt((b - a) * (b - c) * (1 - u));
     }
   }
+  /**
+   * Random Uniform Generator by Inverse Transform Method
+   * @param a min
+   * @param b max
+   */
   uniform(a: number, b: number): number {
     return a + (b - a) * this.genUniform();
   }
+  /**
+   * Random Weibul Generator by Inverse Transform Method
+   * @param lambda
+   * @param beta
+   */
   weibull(lambda: number, beta: number): number {
     if (lambda <= 0) throw new Error("lambda > 0");
     return (1 / lambda) * (-1 * Math.log(this.genUniform())) ** (1 / beta);

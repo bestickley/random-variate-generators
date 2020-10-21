@@ -7,12 +7,13 @@
 ## Use
 ```ts
 import { RandVarGen } from "random-variate-generators";
-const rvg = RandVarGen();
+const rvg = new RandVarGen();
 rvg.bernoulli(.4);
 rvg.binomial(.4, 3);
 rvg.exponential(1);
-rvg.geometric(.4);
+rvg.erlang(1, 2);
 rvg.gamma(.8, 4);
+rvg.geometric(.4);
 rvg.normal(1, 2);
 rvg.poisson(1);
 rvg.triangular(0, 1, 2);

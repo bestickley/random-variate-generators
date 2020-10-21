@@ -1,6 +1,6 @@
 {
   "name": "random-variate-generators",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "description": "Random Variate Generators",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

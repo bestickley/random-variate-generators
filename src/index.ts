@@ -135,7 +135,7 @@ export class RandVarGen {
    * @param mu mean
    * @param sigma standard deviation
    */
-  normal(mu: number, sigma: number): number {
+  normal(mu: number, sigmaSquared: number): number {
     const rand = this.genUniform();
     let sign = 0;
     if (rand - 0.5 > 0) {
@@ -154,7 +154,7 @@ export class RandVarGen {
       sign *
       (t -
         (c0 + c1 * t + c2 * t ** 2) / (1 + d1 * t + d2 * t ** 2 + d3 * t ** 3));
-    return mu + sigma * z;
+    return mu + Math.sqrt(sigmaSquared) * z;
   }
   /**
    * Random Poisson Generator by X

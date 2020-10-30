@@ -25,11 +25,11 @@ rvg.weibull(1, 2);
 Each random variate generator depends on an internal random Uniform(0,1) generator. By default, a [linear congruential generator](https://en.wikipedia.org/wiki/Linear_congruential_generator) is used with the parameters: a=1664525 (multiplier), x0=123456789 (seed), c=1013904223 (increment), m=2^32 (modulus). You can customize the random uniform generator as shown below:
 ```ts
 import { RandVarGen } from "random-variate-generators";
-// customize lcg seed
+// Option 1: customize lcg seed
 const rvgCustomLcgSeed = new RandVarGen(987654321);
-// customize lcg params
+// Option 2: customize lcg params
 const rvgCustomLcgParams = new RandVarGen(22695477, 987654321, 1, 2**32);
-// customize generator
+// Option 3: customize generator
 function* customGenerator() {
   yield Math.random();
 }

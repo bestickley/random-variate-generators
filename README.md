@@ -8,16 +8,27 @@
 ```ts
 import { RandVarGen } from "random-variate-generators";
 const rvg = new RandVarGen();
+// Bernoulli(p)
 rvg.bernoulli(.4);
+// Binomial(p, n)
 rvg.binomial(.4, 3);
+// Exponential(λ)
 rvg.exponential(1);
+// Erlang(λ, n)
 rvg.erlang(1, 2);
+// Gamma(β, λ)
 rvg.gamma(.8, 4);
+// Geometric(p)
 rvg.geometric(.4);
+// Normal(μ, σ^2)
 rvg.normal(1, 2);
+// Poisson(λ)
 rvg.poisson(1);
+// Triangular(min, mode, max)
 rvg.triangular(0, 1, 2);
+// Uniform(min, max)
 rvg.uniform(1, 2);
+// Weibull(λ, β)
 rvg.weibull(1, 2);
 ```
 

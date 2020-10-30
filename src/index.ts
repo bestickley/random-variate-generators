@@ -138,18 +138,18 @@ export class RandVarGen {
   normal(mu: number, sigma: number): number {
     const rand = this.genUniform();
     let sign = 0;
-    if (1 - rand > 0) {
+    if (rand - 0.5 > 0) {
       sign = 1;
-    } else if (1 - rand < 0) {
+    } else if (rand - 0.5 < 0) {
       sign = -1;
     }
-    const t = (Math.log(rand < 1 - rand ? rand : 1 - rand) ** 2) ** (1 / 2);
-    const c0 = 2.515517;
-    const c1 = 0.802853;
-    const c2 = 0.010328;
-    const d1 = 1.432788;
-    const d2 = 0.189269;
-    const d3 = 0.001308;
+    const t = Math.sqrt(Math.log(Math.min(rand, 1 - rand)) ** 2);
+    const c0 = 2.515517,
+      c1 = 0.802853,
+      c2 = 0.010328,
+      d1 = 1.432788,
+      d2 = 0.189269,
+      d3 = 0.001308;
     const z =
       sign *
       (t -

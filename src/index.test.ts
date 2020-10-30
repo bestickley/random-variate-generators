@@ -99,7 +99,7 @@ describe("normal", () => {
     rvg = new RandVarGen();
   });
   test("mu = 1, sigma = 2", () => {
-    expect(rvg.normal(1, 2)).toBe(2.0176075960627617);
+    expect(rvg.normal(1, 2)).toBe(-0.017607596062761743);
   });
 });
 

@@ -24,9 +24,14 @@
     "poisson",
     "binomial",
     "bernoulli",
-    "uniform"
+    "uniform",
+    "GOF",
+    "run",
+    "chi square",
+    "uniform",
+    "independence"
   ],
-  "author": "Ben Stickley <bestickley@gmail.com> & Sreeja Bhashyam",
+  "author": "Ben Stickley <bestickley@gmail.com> & Sreeja Sthothra Bhashyam <sreeja.sthothra@gmail.com>",
   "license": "ISC",
   "repository": {
     "type": "git",

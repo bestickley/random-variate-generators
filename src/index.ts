@@ -8,7 +8,7 @@
 
 // table from: https://people.richland.edu/james/lecture/m170/tbl-chi.html
 
-const acceptedAlphas = [0.995, 0.99, 0.975, 0.95, 0.90, 0.10, 0.05, 0.025, 0.01, 0.005]
+const acceptedCI = [0.995, 0.99, 0.975, 0.95, 0.90]
 
 const chiTable = [
   [0, 0, 0.001, 0.004, 0.016, 2.706, 3.841, 5.024, 6.635, 7.879],
@@ -108,52 +108,41 @@ export class RandVarGen {
     });
     return sum;
   }
-
   /**
    * Chi-Squared GOF Test
-   * @param uniforms list
-   * @param confidenceInterval is the confidence interval, accepted values: 0.995	0.99	0.975	0.95	0.90	0.10	0.05	0.025	0.01	0.005 (single tail test)
+   * @param PRNs list
+   * @param confidenceInterval is the confidence interval, accepted values: 0.995	0.99	0.975	0.95	0.90 (single tail test)
    */
 
-  chiSquaredGOF(uniforms: Array<number>, confidenceInterval: number=0.9, k: number=10): boolean {
-    const alpha = Math.round((1-confidenceInterval)*100)/100
-    if (acceptedAlphas.indexOf(alpha) < 0) throw new Error(`alpha can only be: 0.995	0.99	0.975	0.95	0.90	0.10	0.05	0.025	0.01	0.005 your alpha is ${alpha}`);
+  chiSquaredGOF(PRNs: Array<number>, confidenceInterval: number=0.9, k: number=10): Array<Number> {
+    const CI = Math.round(confidenceInterval*100)/100
+    if (acceptedCI.indexOf(CI) < 0) throw new Error(`confidence interval can only be: 0.995	0.99	0.975	0.95	0.90,	your CI is ${confidenceInterval}`);
     if (k>30 || k<1) throw new Error(`k can only be between 1-30`)
     let table: { [name: number]: number[] } = {};
-
     for (var idx = 0; idx < k; idx++) {
       table[idx] = []
     }
-
     const bucketSize = 1/k;
-
-    const n = uniforms.length
-
-    uniforms.forEach(unif => {
-      const key = Math.floor(unif/bucketSize)
-      table[key].push(unif)
+    const n = PRNs.length
+    PRNs.forEach(PRN => {
+      const key = Math.floor(PRN/bucketSize)
+      table[key].push(PRN)
     })
-
     const expected = n/k
     let chiSquareSum = 0;
-
     Object.keys(table).forEach(key => {
       const observed = table[Number(key)].length
-      chiSquareSum+=((observed - expected)**2)/expected
+      chiSquareSum+= ((observed - expected)**2)/expected
     });
-    return this.chiThreshold(alpha, k, chiSquareSum);
+    chiSquareSum = Math.floor(chiSquareSum*1000)/1000
+    return this.chiThreshold(CI, k, chiSquareSum);
   }
-
-  chiThreshold(alpha: number, k: number, chiVal: number): boolean {
-
-    const column = acceptedAlphas.indexOf(alpha)
+  chiThreshold(CI: number, k: number, chiVal: number): Array<Number> {
+    const column = chiTable[0].length - 1 - acceptedCI.indexOf(CI)
     const row = k-2 // -1 for degrees of freedom, -1 for for zero-indexed
-
-    let chiThreshold = chiTable[row][column]
-
-    return chiThreshold >= chiVal
+    const chiThreshold = chiTable[row][column]
+    return [chiThreshold >= chiVal ? 1 : 0, chiThreshold, chiVal]
   }
-
   /**
    * Random Erlang Generator by Convolution Method
    * @param lambda
@@ -256,26 +245,22 @@ export class RandVarGen {
     }
     return x;
   }
-
   /**
    * Random Triangular Generator by Inverse Transform Method
-   * @param uniforms list of uniforms
-   * @param confidenceInterval for two-sided tail test, accepted values are: 0.
+   * @param PRNs list of pseudo random numbers
+   * @param confidenceInterval for two-sided tail test, accepted values are: 0.8, 0.9, 0.95, 0.98, 0.99, 0.999
    */
-  runTest(uniforms: Array<number>, confidenceInterval: number=0.9): boolean {
-    let n = uniforms.length
+  runsTest(PRNs: Array<number>, confidenceInterval: number=0.9): Array<number> {
+    let n = PRNs.length
     const CIlist = [0.8, 0.8, 0.95, 0.98, 0.99, 0.999]
     const zVal = [1.28, 1.645, 1.96, 2.33, 2.575, 3.29]
-
     if (CIlist.indexOf(confidenceInterval) < 0) throw new Error("Confidence Interval must be one of the following: 0.8, 0.9, 0.95, 0.98, 0.99, 0.999")
-    if (n < 20) console.warn("Please provide a larger set of uniforms for more accurate results.")
-
-    let runs = 0
-    let firstDiff = uniforms[1]-uniforms[0]
+    if (n < 20) console.warn("Please provide a larger set of PRNs for more accurate results.")
+    let runs = 1
+    const firstDiff = PRNs[1]-PRNs[0]
     let currRun = Math.sign(firstDiff)
-
-    for (var idx = 1; idx < uniforms.length; idx++) {
-      let diff = uniforms[idx]-uniforms[idx-1]
+    for (var idx = 1; idx < PRNs.length; idx++) {
+      let diff = PRNs[idx]-PRNs[idx-1]
       if (diff > 0 && currRun===-1) {
         runs+=1
         currRun=1
@@ -286,14 +271,11 @@ export class RandVarGen {
     }
     const mean = ((2*n)-1)/3
     const variance = ((16*n)-29)/90
-
-    let z0 = Math.abs((runs-mean)/Math.sqrt(variance))
-    let i = CIlist.indexOf(confidenceInterval)
-    let zAlpha = zVal[i]
-
-    return zAlpha > z0
+    const z0 = Math.floor(Math.abs((runs-mean)/Math.sqrt(variance))*1000)/1000
+    const i = CIlist.indexOf(confidenceInterval)
+    const zAlpha = zVal[i]
+    return [zAlpha > z0 ? 1 : 0, zAlpha, z0]
   }
-
   /**
    * Random Triangular Generator by Inverse Transform Method
    * @param a minimum

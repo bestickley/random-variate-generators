@@ -48,7 +48,7 @@ Each random variate generator depends on an internal random Uniform(0,1) generat
 ```ts
 import { RandVarGen } from "random-variate-generators";
 // Option 1: customize lcg seed
-const rvgCustomLcgSeed = new RandVarGen(987654321);
+const rvgCustomLcgSeed = new RandVarGen({ lcgSeed: 987654321 });
 // Option 2: customize lcg params
 const rvgCustomLcgParams = new RandVarGen(22695477, 987654321, 1, 2 ** 32);
 // Option 3: customize generator

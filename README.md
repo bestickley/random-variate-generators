@@ -33,6 +33,12 @@ rvg.triangular(0, 1, 2);
 rvg.uniform(1, 2);
 // Weibull(λ, β)
 rvg.weibull(1, 2);
+
+// If you already have a uniform you want to use, you can pass it as a parameter to most of the functions above, like so:
+const PRN = 0.523;
+rvg.normal(1, 2, 0.523);
+// You may want to do this if you have your own list of uniforms you have already tested to be uniform & independent according to the GOF and runs test below.
+// Otherwise, a PRN is generated on the fly.
 ```
 
 ## Customize Random Uniform Generator

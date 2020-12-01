@@ -38,31 +38,16 @@ describe("binomial", () => {
   });
 });
 
-describe("chiSquaredGOF", () => {
+describe("erlang", () => {
   let rvg: RandVarGen;
-  let data: Array<number>;
   beforeEach(() => {
     rvg = new RandVarGen();
-    data = []
-    for (var i = 0; i < 1000; i++) {
-      if (i<179) {
-        data.push(0.1)
-      } else if (i < 387) {
-        data.push(0.3)
-      } else if (i < 609) {
-        data.push(0.5)
-      } else if (i < 808) {
-        data.push(0.7)
-      } else if (i < 1000) {
-        data.push(0.9)
-      }
-    }
   });
-  test("expected: 0.1~179, 0.3~208, 0.5~222, 0.7~199, 0.9~192, k=5, n=1000", () => {
-    expect(rvg.chiSquaredGOF(data, 0.95, 5)).toBe([1, 9.488, 5.27]);
+  test("lambda = 1, n = 2", () => {
+    expect(rvg.erlang(1, 2)).toBe(1.6730119352250947);
   });
-  test("expected: 0.1~179, 0.3~208, 0.5~222, 0.7~199, 0.9~192, k=10, n=1000", () => {
-    expect(rvg.chiSquaredGOF(data, 0.90, 10)).toBe([0, 16.919, 1010.54]);
+  test("lambda = 0, n = 5", () => {
+    expect(() => rvg.erlang(0, 3)).toThrow();
   });
 });
 
@@ -79,16 +64,16 @@ describe("exponential", () => {
   });
 });
 
-describe("erlang", () => {
+describe("gamma", () => {
   let rvg: RandVarGen;
   beforeEach(() => {
     rvg = new RandVarGen();
   });
-  test("lambda = 1", () => {
-    expect(rvg.erlang(1, 2)).toBe(1.6730119352250947);
+  test("beta = .8, lambda = 4", () => {
+    expect(rvg.gamma(0.8, 4)).toBe(0.153993173103836);
   });
-  test("lambda = 0, n = 5", () => {
-    expect(() => rvg.erlang(0, 3)).toThrow();
+  test("beta = 3, lambda = 2", () => {
+    expect(rvg.gamma(3, 2)).toBe(1.86514961062751);
   });
 });
 
@@ -105,19 +90,6 @@ describe("geometric", () => {
   });
   test("p = -0.1", () => {
     expect(() => rvg.bernoulli(-0.1)).toThrow();
-  });
-});
-
-describe("gamma", () => {
-  let rvg: RandVarGen;
-  beforeEach(() => {
-    rvg = new RandVarGen();
-  });
-  test("beta = .8, lambda = 4", () => {
-    expect(rvg.gamma(0.8, 4)).toBe(0.153993173103836);
-  });
-  test("beta = 3, lambda = 2", () => {
-    expect(rvg.gamma(3, 2)).toBe(1.86514961062751);
   });
 });
 
@@ -141,49 +113,6 @@ describe("poisson", () => {
   });
   test("lambda = 5", () => {
     expect(rvg.poisson(5)).toBe(6);
-  });
-});
-
-describe("runsTest", () => {
-  let rvg: RandVarGen;
-  let data: Array<number>;
-  beforeEach(() => {
-    rvg = new RandVarGen();
-    data = [
-      0.79,
-      0.68,
-      0.46,
-      0.69,
-      0.9,
-      0.93,
-      0.99,
-      0.86,
-      0.33,
-      0.22,
-      0.6,
-      0.18,
-      0.59,
-      0.38,
-      0.69,
-      0.76,
-      0.91,
-      0.62,
-      0.22,
-      0.19,
-      0.11,
-      0.45,
-      0.72,
-      0.88,
-      0.65,
-      0.55,
-      0.31,
-      0.27,
-      0.46,
-      0.89
-    ];
-  });
-  test("expected: Nor(19.67, 5.01) with Za/2 = 1.96", () => {
-    expect(rvg.runsTest(data, 0.95)).toBe([0, 1.96, 3.424]);
   });
 });
 

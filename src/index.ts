@@ -1,4 +1,6 @@
 import { lcg } from "./lcg";
+import { chiSquareGOF } from "./gof";
+import {runsTest } from "./runs";
 
 interface RandVarGenConstructorParams {
   customRandNumGen?: Generator<number, void, unknown>;
@@ -13,7 +15,6 @@ function* simpleNumberGenerator(uniforms: number[]) {
     yield u;
   }
 }
-
 export class RandVarGen {
   constructor(params?: RandVarGenConstructorParams) {
     this.configurePrnGenerator(params);
@@ -231,3 +232,5 @@ export class RandVarGen {
     return (1 / lambda) * (-1 * Math.log(this.u)) ** (1 / beta);
   }
 }
+
+export {chiSquareGOF, runsTest};

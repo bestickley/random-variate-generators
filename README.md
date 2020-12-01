@@ -49,14 +49,24 @@ Each random variate generator depends on an internal random Uniform(0,1) generat
 import { RandVarGen } from "random-variate-generators";
 // Option 1: customize lcg seed
 const rvgCustomLcgSeed = new RandVarGen({ lcgSeed: 987654321 });
+
 // Option 2: customize lcg params
 const rvgCustomLcgParams = new RandVarGen(22695477, 987654321, 1, 2 ** 32);
+
 // Option 3: customize generator
 function* customGenerator() {
   yield Math.random();
 }
 const customGen = customGenerator();
 const rvgCustomGenerator = new RandVarGen(customGen);
+
+// Option 4: simple uniform
+// note: on the 2nd uniform generated, an error will occur
+const rvgCustomSimpleUniform = new RandVarGen({ uniform: 1 });
+
+// Option 4: simple uniforms
+// note: on the 4th uniform generated, an error will occur
+const rvgCustomSimpleUniform = new RandVarGen({ uniforms: [1, 2, 3] });
 ```
 
 ## Test PRNs for Uniformity and Independence

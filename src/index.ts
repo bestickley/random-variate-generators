@@ -222,7 +222,7 @@ export class RandVarGen {
     return a + (b - a) * this.u;
   }
   /**
-   * Random Weibul Generator by Inverse Transform Method
+   * Random Weibull Generator by Inverse Transform Method
    * @param lambda
    * @param beta
    */

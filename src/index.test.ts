@@ -38,6 +38,19 @@ describe("binomial", () => {
   });
 });
 
+describe("erlang", () => {
+  let rvg: RandVarGen;
+  beforeEach(() => {
+    rvg = new RandVarGen();
+  });
+  test("lambda = 1, n = 2", () => {
+    expect(rvg.erlang(1, 2)).toBe(1.6730119352250947);
+  });
+  test("lambda = 0, n = 5", () => {
+    expect(() => rvg.erlang(0, 3)).toThrow();
+  });
+});
+
 describe("exponential", () => {
   let rvg: RandVarGen;
   beforeEach(() => {
@@ -51,16 +64,16 @@ describe("exponential", () => {
   });
 });
 
-describe("erlang", () => {
+describe("gamma", () => {
   let rvg: RandVarGen;
   beforeEach(() => {
     rvg = new RandVarGen();
   });
-  test("lambda = 1", () => {
-    expect(rvg.erlang(1, 2)).toBe(1.6730119352250947);
+  test("beta = .8, lambda = 4", () => {
+    expect(rvg.gamma(0.8, 4)).toBe(0.153993173103836);
   });
-  test("lambda = 0, n = 5", () => {
-    expect(() => rvg.erlang(0, 3)).toThrow();
+  test("beta = 3, lambda = 2", () => {
+    expect(rvg.gamma(3, 2)).toBe(1.86514961062751);
   });
 });
 
@@ -77,19 +90,6 @@ describe("geometric", () => {
   });
   test("p = -0.1", () => {
     expect(() => rvg.bernoulli(-0.1)).toThrow();
-  });
-});
-
-describe("gamma", () => {
-  let rvg: RandVarGen;
-  beforeEach(() => {
-    rvg = new RandVarGen();
-  });
-  test("beta = .8, lambda = 4", () => {
-    expect(rvg.gamma(0.8, 4)).toBe(0.153993173103836);
-  });
-  test("beta = 3, lambda = 2", () => {
-    expect(rvg.gamma(3, 2)).toBe(1.86514961062751);
   });
 });
 

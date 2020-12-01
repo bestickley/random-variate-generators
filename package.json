@@ -24,32 +24,34 @@
     "poisson",
     "binomial",
     "bernoulli",
-    "uniform"
+    "uniform",
+    "GOF",
+    "run",
+    "chi square",
+    "uniform",
+    "independence"
   ],
-  "author": "Ben Stickley <bestickley@gmail.com> & Sreeja Bhashyam",
+  "author": "Ben Stickley <bestickley@gmail.com> & Sreeja Sthothra Bhashyam <sreeja.sthothra@gmail.com>",
   "license": "ISC",
   "repository": {
     "type": "git",
     "url": "https://github.com/bestickley/random-variate-generators"
   },
   "devDependencies": {
-    "@commitlint/cli": "^11.0.0",
-    "@commitlint/config-conventional": "^11.0.0",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
     "@types/jest": "^26.0.15",
-    "@typescript-eslint/eslint-plugin": "^4.7.0",
-    "@typescript-eslint/parser": "^4.7.0",
-    "eslint": "^7.13.0",
+    "@typescript-eslint/eslint-plugin": "^4.9.0",
+    "@typescript-eslint/parser": "^4.9.0",
+    "eslint": "^7.14.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "husky": "^4.3.0",
     "jest": "^26.6.3",
-    "prettier": "^2.1.2",
+    "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
-    "semantic-release": "^17.2.2",
+    "semantic-release": "^17.3.0",
     "ts-jest": "^26.4.4",
-    "typescript": "^4.0.5"
+    "typescript": "^4.1.2"
   },
   "volta": {
     "node": "14.13.1"
@@ -73,14 +75,7 @@
     "testEnvironment": "node",
     "collectCoverage": true
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
+  "prettier": {
+    "endOfLine": "auto"
   }
 }

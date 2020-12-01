@@ -3,7 +3,7 @@ export function runsTest(
   confidenceInterval = 0.9
 ): Array<number> {
   const n = PRNs.length;
-  const CIlist = [0.8, 0.8, 0.95, 0.98, 0.99, 0.999];
+  const CIlist = [0.8, 0.9, 0.95, 0.98, 0.99, 0.999];
   const zVal = [1.28, 1.645, 1.96, 2.33, 2.575, 3.29];
   if (CIlist.indexOf(confidenceInterval) < 0)
     throw new Error(
